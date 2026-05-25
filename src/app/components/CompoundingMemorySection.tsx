@@ -96,8 +96,21 @@ export default function CompoundingMemorySection() {
   ];
 
   return (
-    <section id="compounding-memory" className="section-dark section-padding" style={{ background: "#0a0a0a", color: "#ffffff", padding: "120px 0" }}>
-      <div className="container">
+    <section 
+      id="compounding-memory" 
+      className="section-dark section-padding bg-grid-dark" 
+      style={{ 
+        position: "relative",
+        overflow: "hidden",
+        background: "#0a0a0a", 
+        color: "#ffffff", 
+        padding: "120px 0" 
+      }}
+    >
+      {/* Ambient drifting blooms */}
+      <div className="ambient-glow ambient-blue animate-drift-1" style={{ top: "10%", left: "5%", width: "500px", height: "500px" }} />
+      <div className="ambient-glow ambient-purple animate-drift-2" style={{ bottom: "10%", right: "5%", width: "500px", height: "500px" }} />
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
         
         {/* Two-Column Grid */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(380px, 1fr))", gap: "60px", alignItems: "center" }}>

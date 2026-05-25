@@ -13,7 +13,20 @@ export default function WhyNowSection() {
   ];
 
   return (
-    <section id="why-now" className="section-gray section-padding" style={{ background: "var(--bg-gray)", padding: "100px 0" }}>
+    <section 
+      id="why-now" 
+      className="section-gray section-padding bg-dot-light" 
+      style={{ 
+        position: "relative",
+        overflow: "hidden",
+        background: "var(--bg-gray)", 
+        padding: "100px 0",
+        borderTop: "1px solid var(--border-light)"
+      }}
+    >
+      {/* Ambient drifting blooms */}
+      <div className="ambient-glow ambient-coral animate-drift-2" style={{ top: "10%", right: "5%", width: "450px", height: "450px" }} />
+      <div className="ambient-glow ambient-blue animate-drift-1" style={{ bottom: "10%", left: "5%", width: "450px", height: "450px" }} />
       <div className="container">
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))", gap: "60px", alignItems: "center" }}>
           {/* Left Column: Narrative Copy */}

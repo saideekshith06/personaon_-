@@ -33,7 +33,20 @@ export default function WhoItsForSection() {
   };
 
   return (
-    <section id="who-its-for" className="section-light section-padding" style={{ background: "var(--bg-light)", borderTop: "1px solid var(--border-light)", padding: "100px 0" }}>
+    <section 
+      id="who-its-for" 
+      className="section-light section-padding bg-dot-light" 
+      style={{ 
+        position: "relative",
+        overflow: "hidden",
+        background: "var(--bg-light)", 
+        borderTop: "1px solid var(--border-light)", 
+        padding: "100px 0" 
+      }}
+    >
+      {/* Ambient drifting blooms */}
+      <div className="ambient-glow ambient-purple animate-drift-2" style={{ top: "15%", left: "5%", width: "450px", height: "450px" }} />
+      <div className="ambient-glow ambient-emerald animate-drift-1" style={{ bottom: "15%", right: "5%", width: "450px", height: "450px" }} />
       <div className="container">
         
         {/* Title */}
@@ -107,16 +120,19 @@ export default function WhoItsForSection() {
           </div>
 
           {/* Right Panel: Who It IS For */}
-          <div style={{
-            background: "var(--bg-dark)",
-            color: "#ffffff",
-            borderRadius: "24px",
-            padding: "48px 40px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)"
-          }}>
+          <div 
+            className="accent-border-gradient"
+            style={{
+              background: "var(--bg-dark)",
+              color: "#ffffff",
+              borderRadius: "24px",
+              padding: "48px 40px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)"
+            }}
+          >
             <div>
               <h3 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#ffffff", marginBottom: "32px" }}>
                 Who It Is For

@@ -61,8 +61,21 @@ export default function PricingSection() {
   };
 
   return (
-    <section id="pricing" className="section-light section-padding" style={{ background: "var(--bg-light)", borderTop: "1px solid var(--border-light)", padding: "100px 0" }}>
-      <div className="container">
+    <section 
+      id="pricing" 
+      className="section-light section-padding bg-dot-light" 
+      style={{ 
+        position: "relative",
+        overflow: "hidden",
+        background: "var(--bg-light)", 
+        borderTop: "1px solid var(--border-light)", 
+        padding: "100px 0" 
+      }}
+    >
+      {/* Ambient drifting blooms */}
+      <div className="ambient-glow ambient-blue animate-drift-1" style={{ top: "10%", left: "5%", width: "450px", height: "450px" }} />
+      <div className="ambient-glow ambient-purple animate-drift-2" style={{ bottom: "10%", right: "5%", width: "450px", height: "450px" }} />
+      <div className="container" style={{ position: "relative", zIndex: 1 }}>
         
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: "50px" }}>

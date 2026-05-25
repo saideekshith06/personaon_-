@@ -246,14 +246,19 @@ export default function Hero() {
 
   return (
     <section
+      className="bg-dot-light"
       style={{
         position: "relative",
         padding: "80px 0 48px 0",
         overflow: "hidden",
         textAlign: "center",
-        background: "radial-gradient(circle at top, rgba(0, 98, 209, 0.03) 0%, transparent 70%)"
+        background: "radial-gradient(circle at top, rgba(0, 98, 209, 0.04) 0%, transparent 70%)"
       }}
     >
+      {/* Ambient drifting blooms */}
+      <div className="ambient-glow ambient-blue animate-drift-1" style={{ top: "10%", left: "5%", width: "500px", height: "500px" }} />
+      <div className="ambient-glow ambient-purple animate-drift-2" style={{ bottom: "5%", right: "5%", width: "500px", height: "500px" }} />
+
       {/* Interactive Dot pattern bg */}
       <CursorInteractiveDots />
       {/* Subtle glow */}
@@ -265,7 +270,7 @@ export default function Hero() {
           transform: "translateX(-50%)",
           width: "600px",
           height: "400px",
-          background: "radial-gradient(circle, rgba(0, 98, 209, 0.05) 0%, transparent 60%)",
+          background: "radial-gradient(circle, rgba(0, 98, 209, 0.06) 0%, transparent 60%)",
           filter: "blur(40px)",
           zIndex: 0,
           pointerEvents: "none"
@@ -423,6 +428,9 @@ export default function Hero() {
                       label: "EXECUTIVE DOSSIER", 
                       sub: "Generate weekly alignment brief", 
                       prompt: "Generate my weekly executive summary brief",
+                      gradientBg: "linear-gradient(135deg, rgba(0, 110, 97, 0.03) 0%, rgba(255, 255, 255, 0.98) 100%)",
+                      iconBg: "linear-gradient(135deg, rgba(0, 110, 97, 0.08) 0%, rgba(255, 255, 255, 0.8) 100%)",
+                      accentColor: "#006E61",
                       icon: (
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#006E61" strokeWidth="2.5">
                           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -437,6 +445,9 @@ export default function Hero() {
                       label: "DEAL OBJECTIONS LOG", 
                       sub: "Track pricing roadblocks", 
                       prompt: "What pricing objections did Lauren Sinclair raise?",
+                      gradientBg: "linear-gradient(135deg, rgba(30, 80, 255, 0.03) 0%, rgba(255, 255, 255, 0.98) 100%)",
+                      iconBg: "linear-gradient(135deg, rgba(30, 80, 255, 0.08) 0%, rgba(255, 255, 255, 0.8) 100%)",
+                      accentColor: "#1E50FF",
                       icon: (
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1E50FF" strokeWidth="2.5">
                           <circle cx="12" cy="12" r="10"></circle>
@@ -449,6 +460,9 @@ export default function Hero() {
                       label: "CANDIDATE DOSSIER", 
                       sub: "Sync technical ATS specifications", 
                       prompt: "Retrieve candidate Alexander's tech profile",
+                      gradientBg: "linear-gradient(135deg, rgba(139, 92, 246, 0.03) 0%, rgba(255, 255, 255, 0.98) 100%)",
+                      iconBg: "linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(255, 255, 255, 0.8) 100%)",
+                      accentColor: "#8B5CF6",
                       icon: (
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2.5">
                           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -464,7 +478,7 @@ export default function Hero() {
                       className="outlet-tile-card"
                       style={{
                         width: "100%",
-                        background: "rgba(0, 0, 0, 0.015)",
+                        background: tile.gradientBg,
                         border: "1px solid rgba(0, 0, 0, 0.05)",
                         borderRadius: "14px",
                         padding: "16px 14px",
@@ -476,13 +490,23 @@ export default function Hero() {
                         gap: "12px",
                         outline: "none"
                       }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderColor = tile.accentColor;
+                        e.currentTarget.style.background = tile.gradientBg.replace("0.03", "0.07");
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderColor = "rgba(0, 0, 0, 0.05)";
+                        e.currentTarget.style.background = tile.gradientBg;
+                        e.currentTarget.style.transform = "translateY(0)";
+                      }}
                     >
                       <div style={{
                         width: "32px",
                         height: "32px",
                         borderRadius: "8px",
-                        background: "#ffffff",
-                        border: "1px solid rgba(0, 0, 0, 0.05)",
+                        background: tile.iconBg,
+                        border: "1px solid rgba(0, 0, 0, 0.04)",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",

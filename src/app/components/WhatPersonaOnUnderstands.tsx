@@ -52,7 +52,20 @@ export default function WhatPersonaOnUnderstands() {
   ];
 
   return (
-    <section id="what-we-understand" className="section-gray section-padding" style={{ background: "var(--bg-gray)", padding: "100px 0", borderTop: "1px solid var(--border-light)" }}>
+    <section 
+      id="what-we-understand" 
+      className="section-gray section-padding bg-grid-light" 
+      style={{ 
+        position: "relative",
+        overflow: "hidden",
+        background: "var(--bg-gray)", 
+        padding: "100px 0", 
+        borderTop: "1px solid var(--border-light)" 
+      }}
+    >
+      {/* Ambient drifting blooms */}
+      <div className="ambient-glow ambient-blue animate-drift-1" style={{ top: "10%", left: "5%", width: "450px", height: "450px" }} />
+      <div className="ambient-glow ambient-purple animate-drift-2" style={{ bottom: "10%", right: "5%", width: "450px", height: "450px" }} />
       <div className="container">
         
         {/* Header */}
