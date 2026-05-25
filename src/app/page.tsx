@@ -4,8 +4,15 @@ import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FeatureShowcase from "./components/FeatureShowcase";
+import WhyNowSection from "./components/WhyNowSection";
 import ICPSections from "./components/ICPSections";
 import ICPInteractiveWorkflow from "./components/ICPInteractiveWorkflow";
+import RelationshipIntelligenceSection from "./components/RelationshipIntelligenceSection";
+import WhatPersonaOnUnderstands from "./components/WhatPersonaOnUnderstands";
+import CompoundingMemorySection from "./components/CompoundingMemorySection";
+import WhoItsForSection from "./components/WhoItsForSection";
+import SystemLearningSection from "./components/SystemLearningSection";
+import TrustSection from "./components/TrustSection";
 import RealVoiceSection from "./components/RealVoiceSection";
 import HabitMoatSection from "./components/HabitMoatSection";
 import BlogSection from "./components/BlogSection";
@@ -29,8 +36,15 @@ export default function Home() {
       <main style={{ flexGrow: 1 }}>
         <Hero />
         <FeatureShowcase />
+        <WhyNowSection />
         <ICPSections />
         <ICPInteractiveWorkflow />
+        <RelationshipIntelligenceSection />
+        <WhatPersonaOnUnderstands />
+        <CompoundingMemorySection />
+        <WhoItsForSection />
+        <SystemLearningSection />
+        <TrustSection />
         <RealVoiceSection />
         <HabitMoatSection />
         <BlogSection />
@@ -41,3 +55,4 @@ export default function Home() {
     </div>
   );
 }
+
