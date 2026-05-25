@@ -19,7 +19,7 @@ export default function CursorInteractiveDots() {
     let height = (canvas.height = 700);
 
     // Mouse coordinates relative to canvas
-    const mouse = { x: width / 2, y: height / 2, active: false };
+    const mouse = { x: -1000, y: -1000, active: false };
 
     // Define Swarm Particle class
     class Particle {
@@ -29,23 +29,19 @@ export default function CursorInteractiveDots() {
       vy: number;
       size: number;
       baseSpeed: number;
-      angle: number;
       color: string;
       hue: number;
 
       constructor() {
-        // Random initial placement in a circle around the center
-        const angle = Math.random() * Math.PI * 2;
-        const radius = Math.random() * 200 + 100;
-        this.x = width / 2 + Math.cos(angle) * radius;
-        this.y = height / 2 + Math.sin(angle) * radius;
+        // Random initial placement across canvas
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
         
-        this.vx = (Math.random() - 0.5) * 2;
-        this.vy = (Math.random() - 0.5) * 2;
-        this.size = 1.8;
-        this.baseSpeed = Math.random() * 1.5 + 1.0;
-        this.angle = 0;
-        this.hue = 220; // start blue
+        this.vx = (Math.random() - 0.5) * 0.5;
+        this.vy = (Math.random() - 0.5) * 0.5;
+        this.size = 1.6;
+        this.baseSpeed = Math.random() * 0.3 + 0.25; // 4x slower base speed for calm wavy drift
+        this.hue = 210;
         this.color = "";
       }
 
@@ -53,93 +49,67 @@ export default function CursorInteractiveDots() {
         const cx = width / 2;
         const cy = height / 2;
 
-        // 1. Orbital circular force around the center (creates the natural spiral/vortex)
-        const dxCenter = this.x - cx;
-        const dyCenter = this.y - cy;
-        const distCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter) || 1;
+        // 1. Double-frequency sine wave field (creates a smooth, silky liquid/wavy flow)
+        const waveX = Math.sin(this.y * 0.007 + Date.now() * 0.0002) * 0.04;
+        const waveY = Math.cos(this.x * 0.007 + Date.now() * 0.0002) * 0.04;
         
-        // Perpendicular orbital vector
-        const orbitX = -dyCenter / distCenter;
-        const orbitY = dxCenter / distCenter;
+        this.vx += waveX;
+        this.vy += waveY;
 
-        // Weak pull back toward center if they drift too far
-        const pullX = -dxCenter / distCenter;
-        const pullY = -dyCenter / distCenter;
+        // 2. Mouse gravity/attraction (very gentle, steering smoothly toward mouse)
+        if (mouse.active) {
+          const dxMouse = mouse.x - this.x;
+          const dyMouse = mouse.y - this.y;
+          const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse) || 1;
 
-        this.vx += orbitX * 0.05 + pullX * 0.02;
-        this.vy += orbitY * 0.05 + pullY * 0.02;
-
-        // 2. Mouse gravity/attraction (stronger when active)
-        const targetX = mouse.active ? mouse.x : cx;
-        const targetY = mouse.active ? mouse.y : cy;
-        
-        const dxMouse = targetX - this.x;
-        const dyMouse = targetY - this.y;
-        const distMouse = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse) || 1;
-
-        if (distMouse < 320) {
-          const force = (320 - distMouse) / 320;
-          
-          if (distMouse > 50) {
-            // Strong attraction flow toward cursor
-            this.vx += (dxMouse / distMouse) * force * 0.35;
-            this.vy += (dyMouse / distMouse) * force * 0.35;
-          } else {
-            // Orbital swarm buffer when very close (prevents stacking in a single dot)
-            this.vx += (-dyMouse / distMouse) * force * 0.8;
-            this.vy += (dxMouse / distMouse) * force * 0.8;
-            // Gentle repelling force if too close
-            this.vx -= (dxMouse / distMouse) * 0.2;
-            this.vy -= (dyMouse / distMouse) * 0.2;
+          if (distMouse < 280) {
+            const force = (280 - distMouse) / 280;
+            // Gentle fluid attraction
+            this.vx += (dxMouse / distMouse) * force * 0.05;
+            this.vy += (dyMouse / distMouse) * force * 0.05;
           }
         }
 
-        // 3. Friction/Drag (bounds acceleration)
-        this.vx *= 0.94;
-        this.vy *= 0.94;
+        // 3. Friction/Drag (bounds acceleration, keeps it quiet and calm)
+        this.vx *= 0.95;
+        this.vy *= 0.95;
 
         // 4. Update Position
         this.x += this.vx * this.baseSpeed;
         this.y += this.vy * this.baseSpeed;
 
-        // Screen boundary wrapping (gentle respawn if drift off-screen)
-        if (this.x < -50 || this.x > width + 50 || this.y < -50 || this.y > height + 50) {
-          const spawnAngle = Math.random() * Math.PI * 2;
-          this.x = cx + Math.cos(spawnAngle) * 300;
-          this.y = cy + Math.sin(spawnAngle) * 300;
-          this.vx = 0;
-          this.vy = 0;
-        }
+        // 5. Screen boundary wrapping (smooth transition off-screen)
+        if (this.x < -20) this.x = width + 20;
+        if (this.x > width + 20) this.x = -20;
+        if (this.y < -20) this.y = height + 20;
+        if (this.y > height + 20) this.y = -20;
 
-        // 5. Dynamic Hue Spectrum calculation based on angle from center
+        // 6. Dynamic Hue Spectrum calculation based on position relative to center
         const angleFromCenter = Math.atan2(this.y - cy, this.x - cx);
-        // Blue (210) to Purple (280) to Orange/Red (350)
         let hueDeg = 210 + ((angleFromCenter + Math.PI) / (Math.PI * 2)) * 140;
         this.hue = hueDeg;
-        this.color = `hsla(${this.hue}, 85%, 60%, 0.55)`;
+        this.color = `hsla(${this.hue}, 80%, 60%, 0.45)`; // slightly softer color
       }
 
       draw(c: CanvasRenderingContext2D) {
-        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+        const speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy) || 0.1;
         const moveAngle = Math.atan2(this.vy, this.vx);
         
-        // Dash length based on velocity (mimicking Google's vector flow lines)
-        const length = Math.max(3, Math.min(10, speed * 2.5));
+        // Dash length based on velocity (delicate wave threads)
+        const length = Math.max(4, Math.min(8, speed * 7));
 
         c.beginPath();
-        // Start of dash
         c.moveTo(this.x, this.y);
-        // End of dash (points opposite to velocity vector)
         c.lineTo(this.x - Math.cos(moveAngle) * length, this.y - Math.sin(moveAngle) * length);
         
         c.strokeStyle = this.color;
-        c.lineWidth = 1.8;
+        c.lineWidth = 1.6;
         c.lineCap = "round";
         c.stroke();
       }
     }
 
-    const particleCount = 140; // clean density count
+    const particleCount = 130; // perfect density for a subtle feel
     const particles: Particle[] = [];
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
@@ -149,21 +119,6 @@ export default function CursorInteractiveDots() {
     function animate() {
       if (!ctx) return;
       ctx.clearRect(0, 0, width, height);
-
-      // Draw subtle orbital guide circles (very faded, premium detail)
-      const cx = width / 2;
-      const cy = height / 2;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 180, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(0, 98, 209, 0.015)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
-
-      ctx.beginPath();
-      ctx.arc(cx, cy, 280, 0, Math.PI * 2);
-      ctx.strokeStyle = "rgba(0, 98, 209, 0.008)";
-      ctx.lineWidth = 1;
-      ctx.stroke();
 
       // Update & Draw particles
       for (let i = 0; i < particles.length; i++) {
