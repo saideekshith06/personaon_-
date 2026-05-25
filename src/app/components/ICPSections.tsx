@@ -23,8 +23,8 @@ export default function ICPSections() {
       description: "Easily compare candidate nuances, technical preferences, and compensation expectations post-interview."
     },
     {
-      title: "Creators & Trainers",
-      description: "Synthesize audience feedback, FAQ patterns, and coaching sessions into actionable content roadmaps."
+      title: "Investors",
+      description: "Remember pitch details, valuation promises, founder commitments, and key growth metrics across quarters of introductory pitches."
     }
   ];
 
