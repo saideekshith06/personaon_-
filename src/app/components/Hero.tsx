@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import CursorInteractiveDots from "./CursorInteractiveDots";
 
 interface Message {
   id: string;
@@ -241,18 +242,8 @@ export default function Hero() {
         background: "radial-gradient(circle at top, rgba(0, 98, 209, 0.03) 0%, transparent 70%)"
       }}
     >
-      {/* Dot pattern bg */}
-      <div
-        style={{
-          position: "absolute",
-          top: 0, left: 0, right: 0, bottom: 0,
-          backgroundImage: "radial-gradient(var(--border-light) 1px, transparent 1px)",
-          backgroundSize: "32px 32px",
-          opacity: 0.5,
-          zIndex: 0,
-          pointerEvents: "none"
-        }}
-      />
+      {/* Interactive Dot pattern bg */}
+      <CursorInteractiveDots />
       {/* Subtle glow */}
       <div
         style={{
@@ -289,12 +280,29 @@ export default function Hero() {
           <p style={{ color: "var(--text-dark-muted)", fontSize: "1.1rem", maxWidth: "600px", margin: "0 auto 32px auto", lineHeight: "1.6" }}>
             Meetings are where work happens, but important context gets lost after calls. We capture, organize, and remember the details so you don't have to.
           </p>
-          <div style={{ display: "flex", gap: "16px", justifyContent: "center", alignItems: "center" }}>
-            <button className="btn-black" style={{ padding: "14px 28px", borderRadius: "30px", fontSize: "1rem" }}>
+          <div style={{ display: "flex", gap: "16px", justifyContent: "center", alignItems: "center", flexWrap: "wrap" }}>
+            <button className="btn-black" style={{ padding: "14px 28px", borderRadius: "30px", fontSize: "1rem", fontWeight: 600 }}>
               Get Started
             </button>
-            <button className="btn-outline" style={{ padding: "14px 28px", borderRadius: "30px", fontSize: "1rem" }}>
-              Watch Demo
+            <button 
+              className="btn-outline" 
+              style={{ 
+                padding: "14px 28px", 
+                borderRadius: "30px", 
+                fontSize: "1rem", 
+                fontWeight: 600,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                cursor: "pointer"
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download for Windows
             </button>
           </div>
         </div>

@@ -13,6 +13,9 @@ import CompoundingMemorySection from "./components/CompoundingMemorySection";
 import WhoItsForSection from "./components/WhoItsForSection";
 import SystemLearningSection from "./components/SystemLearningSection";
 import TrustSection from "./components/TrustSection";
+import TeamsSection from "./components/TeamsSection";
+import PricingSection from "./components/PricingSection";
+import FAQSection from "./components/FAQSection";
 import RealVoiceSection from "./components/RealVoiceSection";
 import HabitMoatSection from "./components/HabitMoatSection";
 import BlogSection from "./components/BlogSection";
@@ -45,6 +48,9 @@ export default function Home() {
         <WhoItsForSection />
         <SystemLearningSection />
         <TrustSection />
+        <TeamsSection />
+        <PricingSection />
+        <FAQSection />
         <RealVoiceSection />
         <HabitMoatSection />
         <BlogSection />

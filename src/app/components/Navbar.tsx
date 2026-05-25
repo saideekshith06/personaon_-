@@ -69,7 +69,7 @@ export default function Navbar() {
               gap: "32px",
             }}
           >
-            {["How it works", "Who it's for", "Real, not synthetic", "Blog"].map((item) => {
+            {["How it works", "Who it's for", "Pricing", "FAQ", "Blog"].map((item) => {
               const anchor = `/#${item.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
               return (
                 <a
