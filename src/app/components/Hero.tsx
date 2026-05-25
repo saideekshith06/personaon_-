@@ -20,6 +20,18 @@ const SUGGESTIONS = [
 // ─── Knowledge Base (RAG-style) ───────────────────────────────────────────
 const KB: { keywords: string[]; answer: string }[] = [
   {
+    keywords: ["generate my weekly executive summary brief", "executive brief", "weekly brief"],
+    answer: "Weekly Executive Synthesis: Apex Retail checkout latency blocker is tracked at 100ms. Lever ATS integration dependencies are fully resolved for Sarah Jenkins. Valuation runway projections ($1.5M for 18 months seed expansion) have been logged in Christian Vance Capital's diligence folder."
+  },
+  {
+    keywords: ["what pricing objections did lauren sinclair raise", "lauren objections", "lauren pricing"],
+    answer: "Lauren Sinclair objections log: Lauren requested flat SLA competitor alignment during the Enterprise Pitch. We offered a concession to waive the custom domain routing setup fees in exchange for a finalized contract review by Friday."
+  },
+  {
+    keywords: ["retrieve candidate alexander's tech profile", "alexander tech profile", "alexander candidate"],
+    answer: "Candidate Dossier: Alexander (Full Stack Lead). Technical Profile: Scaled multi-tenant custom domain routing layout cutting load speeds by 30%. Expected Comp: $140,000 base + equity incentives. Available to start upon Lever ATS compliance sign-off."
+  },
+  {
     keywords: ["voice", "sound", "tone", "my voice", "answer in my voice", "own words", "style"],
     answer: "PersonaOn doesn't generate a synthetic voice — it learns your actual phrasing, vocabulary, and communication patterns from your real meetings and writing. When someone queries your memory, responses come back in language that reflects how you actually speak, not a template."
   },
@@ -393,48 +405,98 @@ export default function Hero() {
               </div>
 
               {/* Content tiles */}
-              <div>
+              <div style={{ marginTop: "8px" }}>
                 <div style={{
-                  fontSize: "0.7rem",
+                  fontSize: "0.68rem",
                   fontWeight: 700,
                   color: "var(--text-dark-muted)",
                   textTransform: "uppercase",
-                  letterSpacing: "0.1em",
-                  marginBottom: "12px",
+                  letterSpacing: "0.15em",
+                  marginBottom: "14px",
                   textAlign: "left"
                 }}>
-                  IMAGINE YOUR FEATURED
+                  ACTIVE MEMORY OUTLETS
                 </div>
-                <div style={{ display: "flex", gap: "10px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
                   {[
-                    { label: "ESSAY", sub: "Your writing" },
-                    { label: "TALK", sub: "Your videos" },
-                    { label: "POD", sub: "Your podcasts" }
-                  ].map((tile) => (
-                    <div
+                    { 
+                      label: "EXECUTIVE DOSSIER", 
+                      sub: "Generate weekly alignment brief", 
+                      prompt: "Generate my weekly executive summary brief",
+                      icon: (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#006E61" strokeWidth="2.5">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                          <polyline points="14 2 14 8 20 8"></polyline>
+                          <line x1="16" y1="13" x2="8" y2="13"></line>
+                          <line x1="16" y1="17" x2="8" y2="17"></line>
+                          <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                      )
+                    },
+                    { 
+                      label: "DEAL OBJECTIONS LOG", 
+                      sub: "Track pricing roadblocks", 
+                      prompt: "What pricing objections did Lauren Sinclair raise?",
+                      icon: (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1E50FF" strokeWidth="2.5">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                      )
+                    },
+                    { 
+                      label: "CANDIDATE DOSSIER", 
+                      sub: "Sync technical ATS specifications", 
+                      prompt: "Retrieve candidate Alexander's tech profile",
+                      icon: (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8B5CF6" strokeWidth="2.5">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                          <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                      )
+                    }
+                  ].map((tile, i) => (
+                    <button
                       key={tile.label}
+                      onClick={() => ask(tile.prompt)}
+                      disabled={isThinking}
+                      className="outlet-tile-card"
                       style={{
-                        flex: 1,
-                        background: "linear-gradient(160deg, #1a1a1a 0%, #2c2c2c 100%)",
+                        width: "100%",
+                        background: "rgba(0, 0, 0, 0.015)",
+                        border: "1px solid rgba(0, 0, 0, 0.05)",
                         borderRadius: "14px",
-                        padding: "12px 10px 14px",
-                        color: "#fff",
+                        padding: "16px 14px",
                         textAlign: "left",
                         cursor: "pointer",
-                        transition: "transform 0.2s",
-                        minHeight: "100px",
+                        transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
                         display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "flex-end"
+                        alignItems: "center",
+                        gap: "12px",
+                        outline: "none"
                       }}
-                      onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
                     >
-                      <div style={{ fontSize: "0.6rem", fontWeight: 700, color: "rgba(255,255,255,0.5)", letterSpacing: "0.08em", marginBottom: "4px" }}>
-                        {tile.label}
+                      <div style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "8px",
+                        background: "#ffffff",
+                        border: "1px solid rgba(0, 0, 0, 0.05)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0
+                      }}>
+                        {tile.icon}
                       </div>
-                      <div style={{ fontSize: "0.82rem", fontWeight: 600, color: "#fff" }}>{tile.sub}</div>
-                    </div>
+                      <div style={{ flexGrow: 1 }}>
+                        <div style={{ fontSize: "0.62rem", fontWeight: 800, color: "var(--text-dark-muted)", letterSpacing: "0.08em", marginBottom: "2px" }}>
+                          {tile.label}
+                        </div>
+                        <div style={{ fontSize: "0.78rem", fontWeight: 600, color: "var(--text-dark)", lineHeight: "1.2" }}>{tile.sub}</div>
+                      </div>
+                    </button>
                   ))}
                 </div>
               </div>
@@ -703,6 +765,13 @@ export default function Hero() {
         .chat-scroll::-webkit-scrollbar { width: 3px; }
         .chat-scroll::-webkit-scrollbar-track { background: transparent; }
         .chat-scroll::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.07); border-radius: 4px; }
+
+        .outlet-tile-card:hover {
+          transform: translateY(-2px);
+          background: rgba(0, 0, 0, 0.03) !important;
+          border-color: rgba(30, 80, 255, 0.15) !important;
+          box-shadow: 0 4px 14px rgba(0, 0, 0, 0.02) !important;
+        }
 
         @keyframes msgSlide {
           from { opacity: 0; transform: translateY(8px); }
