@@ -798,18 +798,9 @@ export default function Hero() {
                 </button>
               </div>
 
-              {/* Footer label & Telemetry Status Bar */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: "16px", borderTop: "1px solid rgba(9, 9, 11, 0.05)", paddingTop: "12px" }}>
-                <span style={{ fontSize: "0.65rem", color: "#a1a1aa", letterSpacing: "0.08em", fontWeight: 600 }}>
-                  PERSONAON MEMORY PLAYGROUND
-                </span>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "4px", fontSize: "0.62rem", color: "#a1a1aa", fontWeight: 600, letterSpacing: "0.04em" }}>
-                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" style={{ color: "#22c55e" }}>
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                  AES-256 SECURE
-                </span>
+              {/* Footer label */}
+              <div style={{ textAlign: "center", marginTop: "16px", borderTop: "1px solid rgba(9, 9, 11, 0.05)", paddingTop: "12px", fontSize: "0.65rem", color: "#a1a1aa", letterSpacing: "0.08em", fontWeight: 600 }}>
+                PERSONAON MEMORY PLAYGROUND
               </div>
 
             </div>
