@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import FeatureShowcase from "./components/FeatureShowcase";
 import WhyNowSection from "./components/WhyNowSection";
+import TelemetryDashboard from "./components/TelemetryDashboard";
 import ICPSections from "./components/ICPSections";
 import ICPInteractiveWorkflow from "./components/ICPInteractiveWorkflow";
 import RelationshipIntelligenceSection from "./components/RelationshipIntelligenceSection";
@@ -40,6 +41,7 @@ export default function Home() {
         <Hero />
         <FeatureShowcase />
         <WhyNowSection />
+        <TelemetryDashboard />
         <ICPSections />
         <ICPInteractiveWorkflow />
         <RelationshipIntelligenceSection />

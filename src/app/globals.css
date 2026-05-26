@@ -339,3 +339,64 @@ button, input, textarea, select {
   50% { transform: translateY(-5px); }
 }
 
+/* ─── Responsive & UI Refinements (shadcn/ui & Mantine inspired) ─── */
+.desktop-only {
+  display: flex !important;
+}
+
+.mobile-only {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: block !important;
+  }
+
+  .mobile-hide {
+    display: none !important;
+  }
+
+  .section-padding {
+    padding: 50px 0 !important;
+  }
+
+  /* Force grids to wrap gracefully */
+  .responsive-grid-2,
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+}
+
+/* Premium Drawer Slide Animation */
+@keyframes slideDownIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-drawer-in {
+  animation: slideDownIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Global button focus and micro-interaction states */
+button, a.btn-black, a.btn-outline {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button:active {
+  transform: scale(0.97) !important;
+}
+
+

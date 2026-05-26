@@ -88,7 +88,7 @@ export default function WhyNowSection() {
           </div>
 
           {/* Right Column: Fragmentation Grid */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
+          <div className="responsive-grid-2" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" }}>
             {fragments.map((item, idx) => (
               <div 
                 key={idx}

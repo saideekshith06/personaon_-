@@ -84,10 +84,10 @@ export default function WhoItsForSection() {
         </div>
 
         {/* Two-Panel Layout */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "32px", maxWidth: "1000px", margin: "0 auto 60px auto" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "32px", maxWidth: "1000px", margin: "0 auto 60px auto" }}>
           
           {/* Left Panel: Who It's NOT For */}
-          <div style={{
+          <div className="panel-card" style={{
             background: "rgba(0, 0, 0, 0.02)",
             border: "1px solid var(--border-light)",
             borderRadius: "24px",
@@ -121,7 +121,7 @@ export default function WhoItsForSection() {
 
           {/* Right Panel: Who It IS For */}
           <div 
-            className="accent-border-gradient"
+            className="accent-border-gradient panel-card"
             style={{
               background: "var(--bg-dark)",
               color: "#ffffff",
@@ -202,6 +202,13 @@ export default function WhoItsForSection() {
         </div>
 
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          :global(.panel-card) {
+            padding: 32px 24px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
