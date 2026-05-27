@@ -348,11 +348,29 @@ button, input, textarea, select {
   display: none !important;
 }
 
+/* Tablet (<= 1024px): keep desktop chrome, but ease dense multi-column
+   grids to two-up and tighten spacing so content isn't cramped. */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .section-padding {
+    padding: 56px 0;
+  }
+
+  .responsive-grid-3,
+  .responsive-grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
 @media (max-width: 768px) {
   .desktop-only {
     display: none !important;
   }
-  
+
   .mobile-only {
     display: block !important;
   }
@@ -361,16 +379,31 @@ button, input, textarea, select {
     display: none !important;
   }
 
+  .container {
+    padding: 0 20px;
+  }
+
   .section-padding {
     padding: 50px 0 !important;
   }
 
-  /* Force grids to wrap gracefully */
+  /* Force grids to a single column on phones */
   .responsive-grid-2,
   .responsive-grid-3,
   .responsive-grid-4 {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
+  }
+}
+
+/* Small phones (<= 480px): tighten gutters and vertical rhythm. */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+
+  .section-padding {
+    padding: 40px 0 !important;
   }
 }
 

@@ -2,9 +2,9 @@ import React from "react";
 
 export default function FeatureShowcase() {
   return (
-    <section 
-      id="how-it-works" 
-      className="section-light section-padding bg-grid-light" 
+    <section
+      id="features"
+      className="section-light section-padding bg-grid-light"
       style={{ 
         position: "relative",
         overflow: "hidden",
@@ -88,7 +88,7 @@ export default function FeatureShowcase() {
               background: "#ffffff",
               border: "1px solid rgba(0, 0, 0, 0.05)",
               borderLeft: "5px solid #1E50FF",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.015)",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
               position: "relative",
               overflow: "hidden"
             }}
@@ -165,7 +165,7 @@ export default function FeatureShowcase() {
               background: "#ffffff",
               border: "1px solid rgba(0, 0, 0, 0.05)",
               borderLeft: "5px solid #10B981",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.015)",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
               position: "relative",
               overflow: "hidden"
             }}
@@ -242,7 +242,7 @@ export default function FeatureShowcase() {
               background: "#ffffff",
               border: "1px solid rgba(0, 0, 0, 0.05)",
               borderLeft: "5px solid #F59E0B",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.015)",
+              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
               position: "relative",
               overflow: "hidden"
             }}
