@@ -32,6 +32,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Offset anchored sections (e.g. #how-it-works) below the sticky navbar */
+  scroll-padding-top: 90px;
 }
 
 body {

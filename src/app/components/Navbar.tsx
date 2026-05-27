@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 
 const navItems = [
-  { label: "How it works", href: "/how-it-works" },
+  { label: "How it works", href: "/#how-it-works" },
   { label: "ICP", href: "/icp" },
   { label: "Enterprise", href: "/enterprise" },
   { label: "Pricing", href: "/pricing" },
