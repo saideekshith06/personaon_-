@@ -22,7 +22,7 @@ export default function Footer() {
           {/* Logo & Description Column */}
           <div style={{ gridColumn: "span 2", minWidth: "260px" }}>
             <a href="#" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px", color: "var(--text-dark)" }}>
-              <Logo width={160} />
+              <Logo width={220} />
             </a>
             <p style={{ lineHeight: "1.6", fontSize: "0.95rem", color: "var(--text-dark-muted)", marginBottom: "24px" }}>
               Capture meetings, extract decisions, and build your searchable work memory. Never lose the context of a conversation again.

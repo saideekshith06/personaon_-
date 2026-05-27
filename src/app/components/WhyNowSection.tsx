@@ -13,15 +13,14 @@ export default function WhyNowSection() {
   ];
 
   return (
-    <section 
-      id="why-now" 
-      className="section-gray section-padding bg-dot-light" 
-      style={{ 
+    <section
+      id="why-now"
+      className="section-light section-padding bg-grid-light"
+      style={{
         position: "relative",
         overflow: "hidden",
-        background: "var(--bg-gray)", 
-        padding: "100px 0",
-        borderTop: "1px solid var(--border-light)"
+        background: "var(--bg-light)",
+        padding: "100px 0"
       }}
     >
       {/* Ambient drifting blooms */}
@@ -104,6 +103,7 @@ export default function WhyNowSection() {
                   minHeight: "140px",
                   position: "relative",
                   overflow: "hidden",
+                  boxShadow: "0 8px 24px rgba(0, 0, 0, 0.05)",
                   transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
                 }}
               >

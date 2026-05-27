@@ -5,9 +5,9 @@ export default function Logo({ width = 180, dark = false }) {
   // but for now we'll just render the image directly.
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <img 
-        src="/logo.png" 
-        alt="PersonaOn Logo" 
+      <img
+        src="/personaon_black.svg"
+        alt="PersonaOn Logo"
         style={{ 
           width: `${width}px`, 
           height: "auto",

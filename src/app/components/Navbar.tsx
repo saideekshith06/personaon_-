@@ -1,11 +1,23 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
+
+const navItems = [
+  { label: "How it works", href: "/how-it-works" },
+  { label: "ICP", href: "/icp" },
+  { label: "Enterprise", href: "/enterprise" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
+  { label: "FAQ", href: "/faq" },
+];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,36 +82,36 @@ export default function Navbar() {
             }}
             className="desktop-only"
           >
-            {["How it works", "Who it's for", "Pricing", "FAQ", "Blog"].map((item) => {
-              const anchor = `/#${item.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+            {navItems.map((item) => {
+              const isActive = pathname === item.href;
               return (
-                <a
-                  key={item}
-                  href={anchor}
+                <Link
+                  key={item.href}
+                  href={item.href}
                   style={{
                     fontSize: "0.9rem",
-                    fontWeight: 500,
-                    color: "var(--text-dark-muted)",
+                    fontWeight: isActive ? 600 : 500,
+                    color: isActive ? "var(--text-dark)" : "var(--text-dark-muted)",
                     transition: "var(--transition-smooth)",
                   }}
                   className="nav-link"
                 >
-                  {item}
-                </a>
+                  {item.label}
+                </Link>
               );
             })}
           </nav>
 
           {/* CTA Links (Hidden on mobile) */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }} className="desktop-only">
-            <a 
-              href="#" 
-              style={{ 
-                padding: "8px 20px", 
-                borderRadius: "12px", 
-                border: "1px solid rgba(9, 9, 11, 0.08)", 
-                background: "#ffffff", 
-                color: "#09090b", 
+            <a
+              href="#"
+              style={{
+                padding: "8px 20px",
+                borderRadius: "12px",
+                border: "1px solid rgba(9, 9, 11, 0.08)",
+                background: "#ffffff",
+                color: "#09090b",
                 fontSize: "0.85rem", 
                 fontWeight: 700, 
                 textDecoration: "none",
@@ -226,34 +238,37 @@ export default function Navbar() {
             }}
           >
             <nav style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-              {["How it works", "Who it's for", "Pricing", "FAQ", "Blog"].map((item) => (
-                <a
-                  key={item}
-                  href={`/#${item.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  onClick={() => setMenuOpen(false)}
-                  style={{
-                    fontSize: "1.1rem",
-                    fontWeight: 600,
-                    color: "var(--text-dark)",
-                    padding: "6px 0",
-                    transition: "color 0.2s"
-                  }}
-                >
-                  {item}
-                </a>
-              ))}
+              {navItems.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMenuOpen(false)}
+                    style={{
+                      fontSize: "1.1rem",
+                      fontWeight: 600,
+                      color: isActive ? "#1E50FF" : "var(--text-dark)",
+                      padding: "6px 0",
+                      transition: "color 0.2s"
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
             </nav>
             <hr style={{ border: 0, borderTop: "1px solid var(--border-light)" }} />
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              <a 
-                href="#" 
-                onClick={() => setMenuOpen(false)} 
-                style={{ 
+              <a
+                href="#"
+                onClick={() => setMenuOpen(false)}
+                style={{
                   display: "flex",
-                  justifyContent: "center", 
+                  justifyContent: "center",
                   alignItems: "center",
                   gap: "8px",
-                  padding: "12px 20px", 
+                  padding: "12px 20px",
                   width: "100%",
                   borderRadius: "12px",
                   border: "1px solid rgba(9, 9, 11, 0.08)",
