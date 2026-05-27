@@ -3,10 +3,10 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ICPSections from "../components/ICPSections";
-import ICPInteractiveWorkflow from "../components/ICPInteractiveWorkflow";
+import UseCasesSections from "../components/UseCasesSections";
+import UseCasesInteractiveWorkflow from "../components/UseCasesInteractiveWorkflow";
 
-export default function ICPPage() {
+export default function UseCasesPage() {
   return (
     <div
       style={{
@@ -19,8 +19,8 @@ export default function ICPPage() {
     >
       <Navbar />
       <main style={{ flexGrow: 1 }}>
-        <ICPSections />
-        <ICPInteractiveWorkflow />
+        <UseCasesSections />
+        <UseCasesInteractiveWorkflow />
       </main>
       <Footer />
     </div>

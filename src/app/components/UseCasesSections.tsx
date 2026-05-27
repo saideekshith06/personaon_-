@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ICPSections() {
+export default function UseCasesSections() {
   const personas = [
     {
       title: "Founders",
@@ -119,7 +119,7 @@ export default function ICPSections() {
           <div style={{ position: "absolute", bottom: 0, left: 0, fontSize: "1.1rem", color: "rgba(0,0,0,0.18)", fontFamily: "monospace", fontWeight: 700 }}>+</div>
           <div style={{ position: "absolute", bottom: 0, right: 0, fontSize: "1.1rem", color: "rgba(0,0,0,0.18)", fontFamily: "monospace", fontWeight: 700 }}>+</div>
 
-          {/* 3x2 Grid for the 6 ICPs */}
+          {/* 3x2 Grid for the 6 Use Cases */}
           <div
             style={{
               display: "grid",

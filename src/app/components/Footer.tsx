@@ -14,43 +14,19 @@ export default function Footer() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr",
             gap: "48px",
             marginBottom: "60px",
           }}
         >
           {/* Logo & Description Column */}
-          <div style={{ gridColumn: "span 2", minWidth: "260px" }}>
+          <div style={{ minWidth: "220px" }}>
             <a href="#" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px", color: "var(--text-dark)" }}>
               <Logo width={220} />
             </a>
             <p style={{ lineHeight: "1.6", fontSize: "0.95rem", color: "var(--text-dark-muted)", marginBottom: "24px" }}>
               Capture meetings, extract decisions, and build your searchable work memory. Never lose the context of a conversation again.
             </p>
-            {/* System Status */}
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-                padding: "6px 14px",
-                borderRadius: "20px",
-                fontSize: "0.8rem",
-                color: "var(--text-dark-muted)",
-                fontWeight: 600,
-                border: "1px solid var(--border-light)"
-              }}
-            >
-              <span
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  background: "#10b981",
-                  borderRadius: "50%",
-                }}
-              />
-              All Systems Operational
-            </div>
           </div>
 
           {/* Product Links */}
@@ -59,7 +35,7 @@ export default function Footer() {
               Product
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.9rem" }}>
-              {["Meeting Capture", "Memory Search", "Team Workspaces", "Integrations", "Pricing"].map((link) => (
+              {["Meeting Capture", "Memory Search", "Pricing"].map((link) => (
                 <li key={link}>
                   <a href="#" style={{ color: "var(--text-dark-muted)", transition: "var(--transition-smooth)" }} className="footer-link">
                     {link}
@@ -75,7 +51,7 @@ export default function Footer() {
               Company
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.9rem" }}>
-              {["About Us", "Customers", "Careers", "Security", "Contact"].map((link) => (
+              {["About Us", "Contact"].map((link) => (
                 <li key={link}>
                   <a href="#" style={{ color: "var(--text-dark-muted)", transition: "var(--transition-smooth)" }} className="footer-link">
                     {link}
@@ -91,7 +67,7 @@ export default function Footer() {
               Resources
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.9rem" }}>
-              {["Help Center", "API Reference", "Guides & Tutorials", "Blog", "Status Page"].map((link) => (
+              {["Guides & Tutorials", "Blog"].map((link) => (
                 <li key={link}>
                   <a href="#" style={{ color: "var(--text-dark-muted)", transition: "var(--transition-smooth)" }} className="footer-link">
                     {link}
