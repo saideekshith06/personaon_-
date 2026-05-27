@@ -14,7 +14,7 @@ interface RememberItem {
   example: string;
 }
 
-interface ICPData {
+interface UseCaseData {
   id: string;
   name: string;
   role: string;
@@ -39,8 +39,8 @@ interface ICPData {
   };
 }
 
-export default function ICPInteractiveWorkflow() {
-  const [activeIcpIdx, setActiveIcpIdx] = useState(0);
+export default function UseCasesInteractiveWorkflow() {
+  const [activeUseCaseIdx, setActiveUseCaseIdx] = useState(0);
   const [activePhase, setActivePhase] = useState<"pre" | "in" | "post">("pre");
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [typedText, setTypedText] = useState("");
@@ -50,7 +50,7 @@ export default function ICPInteractiveWorkflow() {
   
   const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const icps: ICPData[] = [
+  const useCases: UseCaseData[] = [
     {
       id: "founders",
       name: "Founders",
@@ -329,7 +329,7 @@ export default function ICPInteractiveWorkflow() {
     }
   ];
 
-  const activeIcp = icps[activeIcpIdx];
+  const activeUseCase = useCases[activeUseCaseIdx];
 
   // Simulation parameters
   const baseDuration = 6000;
@@ -365,7 +365,7 @@ export default function ICPInteractiveWorkflow() {
     return () => {
       if (progressTimerRef.current) clearInterval(progressTimerRef.current);
     };
-  }, [isAutoplay, activePhase, activeIcpIdx, playbackSpeed]);
+  }, [isAutoplay, activePhase, activeUseCaseIdx, playbackSpeed]);
 
   // Typewriter prompt query
   useEffect(() => {
@@ -377,7 +377,7 @@ export default function ICPInteractiveWorkflow() {
 
     setShowAnswer(false);
     let currentText = "";
-    const targetQuery = activeIcp.details.postQuery;
+    const targetQuery = activeUseCase.details.postQuery;
     let i = 0;
     const speed = 25 / playbackSpeed;
 
@@ -395,7 +395,7 @@ export default function ICPInteractiveWorkflow() {
     }, speed);
 
     return () => clearInterval(interval);
-  }, [activePhase, activeIcpIdx, playbackSpeed]);
+  }, [activePhase, activeUseCaseIdx, playbackSpeed]);
 
   const handlePhaseChange = (phase: "pre" | "in" | "post") => {
     setActivePhase(phase);
@@ -415,7 +415,7 @@ export default function ICPInteractiveWorkflow() {
 
   return (
     <section 
-      id="icp-blog" 
+      id="use-cases-blog" 
       className="section-padding" 
       style={{ 
         background: "var(--bg-light)", 
@@ -433,7 +433,7 @@ export default function ICPInteractiveWorkflow() {
           transform: "translate(-50%, -50%)",
           width: "950px",
           height: "600px",
-          background: activeIcp.bgGlow,
+          background: activeUseCase.bgGlow,
           filter: "blur(90px)",
           pointerEvents: "none",
           transition: "background 0.6s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -472,7 +472,7 @@ export default function ICPInteractiveWorkflow() {
             fontWeight: 400, 
             fontStyle: "italic", 
             fontFamily: "'Instrument Serif', Georgia, serif", 
-            color: activeIcp.themeColor, 
+            color: activeUseCase.themeColor, 
             letterSpacing: "-0.02em", 
             marginBottom: "24px",
             lineHeight: 1.05,
@@ -492,7 +492,7 @@ export default function ICPInteractiveWorkflow() {
           </p>
         </div>
 
-        {/* 6-ICP Selector Row */}
+        {/* Use Cases Selector Row */}
         <div style={{
           display: "flex",
           justifyContent: "center",
@@ -502,13 +502,13 @@ export default function ICPInteractiveWorkflow() {
           maxWidth: "1000px",
           margin: "0 auto 40px auto"
         }}>
-          {icps.map((icp, idx) => {
-            const isActive = idx === activeIcpIdx;
+          {useCases.map((useCase, idx) => {
+            const isActive = idx === activeUseCaseIdx;
             return (
               <button
-                key={icp.id}
+                key={useCase.id}
                 onClick={() => {
-                  setActiveIcpIdx(idx);
+                  setActiveUseCaseIdx(idx);
                   setActivePhase("pre");
                   setAutoplayProgress(0);
                 }}
@@ -532,12 +532,12 @@ export default function ICPInteractiveWorkflow() {
                   <span style={{ 
                     width: "6px", 
                     height: "6px", 
-                    background: icp.themeColor, 
+                    background: useCase.themeColor, 
                     borderRadius: "50%",
-                    boxShadow: `0 0 8px ${icp.themeColor}`
+                    boxShadow: `0 0 8px ${useCase.themeColor}`
                   }}></span>
                 )}
-                {icp.name}
+                {useCase.name}
               </button>
             );
           })}
@@ -569,14 +569,14 @@ export default function ICPInteractiveWorkflow() {
               <div style={{
                 fontSize: "0.75rem",
                 fontWeight: 800,
-                color: activeIcp.themeColor,
+                color: activeUseCase.themeColor,
                 textTransform: "uppercase",
                 letterSpacing: "0.1em",
                 marginBottom: "12px",
                 display: "inline-block",
                 padding: "4px 10px",
                 borderRadius: "10px",
-                background: activeIcp.pillColor
+                background: activeUseCase.pillColor
               }}>
                 The Operational Reality
               </div>
@@ -596,7 +596,7 @@ export default function ICPInteractiveWorkflow() {
                 lineHeight: 1.6,
                 marginBottom: "24px"
               }}>
-                {activeIcp.painText}
+                {activeUseCase.painText}
               </p>
             </div>
             
@@ -640,7 +640,7 @@ export default function ICPInteractiveWorkflow() {
                 Before PersonaOn
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-                {activeIcp.beforeOutcomes.map((item, idx) => (
+                {activeUseCase.beforeOutcomes.map((item, idx) => (
                   <li key={idx} style={{
                     fontSize: "0.85rem",
                     color: "var(--text-dark-muted)",
@@ -669,7 +669,7 @@ export default function ICPInteractiveWorkflow() {
                 After PersonaOn
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-                {activeIcp.afterOutcomes.map((item, idx) => (
+                {activeUseCase.afterOutcomes.map((item, idx) => (
                   <li key={idx} style={{
                     fontSize: "0.85rem",
                     color: "var(--text-dark)",
@@ -679,7 +679,7 @@ export default function ICPInteractiveWorkflow() {
                     lineHeight: 1.45,
                     fontWeight: 500
                   }}>
-                    <span style={{ color: activeIcp.themeColor, fontWeight: 900 }}>✓</span>
+                    <span style={{ color: activeUseCase.themeColor, fontWeight: 900 }}>✓</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -737,7 +737,7 @@ export default function ICPInteractiveWorkflow() {
                 left: "10%",
                 width: "250px",
                 height: "250px",
-                background: `radial-gradient(circle, ${activeIcp.themeColor}12 0%, transparent 70%)`,
+                background: `radial-gradient(circle, ${activeUseCase.themeColor}12 0%, transparent 70%)`,
                 pointerEvents: "none",
                 zIndex: 0
               }} />
@@ -769,8 +769,8 @@ export default function ICPInteractiveWorkflow() {
                   padding: "5px 12px",
                   borderRadius: "20px",
                   fontWeight: 700,
-                  color: activeIcp.themeColor,
-                  border: `1px solid ${activeIcp.themeColor}33`,
+                  color: activeUseCase.themeColor,
+                  border: `1px solid ${activeUseCase.themeColor}33`,
                   letterSpacing: "0.03em"
                 }}>
                   {activePhase === "pre" ? "PRE-MEET" : activePhase === "in" ? "IN-MEET" : "POST-MEET"}
@@ -807,7 +807,7 @@ export default function ICPInteractiveWorkflow() {
                       boxShadow: "0 8px 24px rgba(0,0,0,0.3)"
                     }}>
                       <div style={{
-                        background: activeIcp.themeColor,
+                        background: activeUseCase.themeColor,
                         width: "100%",
                         height: "14px",
                         position: "absolute",
@@ -824,7 +824,7 @@ export default function ICPInteractiveWorkflow() {
                       <div className="cascade-bar" style={{
                         position: "absolute",
                         top: 0, left: 0, height: "100%", width: "40px",
-                        background: `linear-gradient(to right, transparent, ${activeIcp.themeColor})`,
+                        background: `linear-gradient(to right, transparent, ${activeUseCase.themeColor})`,
                         animation: "dataStream 1.5s infinite linear"
                       }} />
                       
@@ -839,12 +839,12 @@ export default function ICPInteractiveWorkflow() {
                       width: "74px",
                       height: "74px",
                       borderRadius: "50%",
-                      background: `radial-gradient(circle, ${activeIcp.themeColor}1a 0%, transparent 75%)`,
-                      border: `2px solid ${activeIcp.themeColor}`,
+                      background: `radial-gradient(circle, ${activeUseCase.themeColor}1a 0%, transparent 75%)`,
+                      border: `2px solid ${activeUseCase.themeColor}`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      boxShadow: `0 0 24px ${activeIcp.themeColor}33`,
+                      boxShadow: `0 0 24px ${activeUseCase.themeColor}33`,
                       animation: "pulseOrb 2.5s infinite ease-in-out"
                     }}>
                       <div style={{ 
@@ -856,7 +856,7 @@ export default function ICPInteractiveWorkflow() {
                         alignItems: "center", 
                         justifyContent: "center", 
                         fontSize: "0.95rem", 
-                        color: activeIcp.themeColor, 
+                        color: activeUseCase.themeColor, 
                         fontWeight: 800,
                         border: "1px solid rgba(255,255,255,0.1)"
                       }}>
@@ -904,10 +904,10 @@ export default function ICPInteractiveWorkflow() {
                         fontWeight: 700,
                         color: "#fff"
                       }}>
-                        {activeIcp.details.inSpeakers[0].initials}
+                        {activeUseCase.details.inSpeakers[0].initials}
                       </div>
                       <div style={{ fontSize: "0.75rem", color: "#888", marginTop: "6px", fontWeight: 500 }}>
-                        {activeIcp.details.inSpeakers[0].name.split(" ")[0]}
+                        {activeUseCase.details.inSpeakers[0].name.split(" ")[0]}
                       </div>
                     </div>
 
@@ -930,7 +930,7 @@ export default function ICPInteractiveWorkflow() {
                             style={{ 
                               width: "3px", 
                               height: "100%", 
-                              background: activeIcp.themeColor, 
+                              background: activeUseCase.themeColor, 
                               borderRadius: "2px",
                               transformOrigin: "center",
                               animation: `soundWave 1.1s infinite ease-in-out alternate`,
@@ -944,7 +944,7 @@ export default function ICPInteractiveWorkflow() {
                         position: "absolute", 
                         bottom: "-14px", 
                         fontSize: "0.6rem", 
-                        color: activeIcp.themeColor, 
+                        color: activeUseCase.themeColor, 
                         fontWeight: 800, 
                         textTransform: "uppercase", 
                         letterSpacing: "0.08em" 
@@ -959,10 +959,10 @@ export default function ICPInteractiveWorkflow() {
                         width: "60px",
                         height: "60px",
                         borderRadius: "50%",
-                        border: `2px solid ${activeIcp.themeColor}`,
-                        boxShadow: `0 0 16px ${activeIcp.themeColor}44`,
+                        border: `2px solid ${activeUseCase.themeColor}`,
+                        boxShadow: `0 0 16px ${activeUseCase.themeColor}44`,
                         overflow: "hidden",
-                        background: activeIcp.themeColor,
+                        background: activeUseCase.themeColor,
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
@@ -971,10 +971,10 @@ export default function ICPInteractiveWorkflow() {
                         color: "#fff",
                         animation: "pulseBorder 1.5s infinite"
                       }}>
-                        {activeIcp.initials}
+                        {activeUseCase.initials}
                       </div>
-                      <div style={{ fontSize: "0.75rem", color: activeIcp.themeColor, marginTop: "6px", fontWeight: 700 }}>
-                        {activeIcp.details.inSpeakers[1].name.split(" ")[0]}
+                      <div style={{ fontSize: "0.75rem", color: activeUseCase.themeColor, marginTop: "6px", fontWeight: 700 }}>
+                        {activeUseCase.details.inSpeakers[1].name.split(" ")[0]}
                       </div>
                     </div>
                   </div>
@@ -1004,9 +1004,9 @@ export default function ICPInteractiveWorkflow() {
                       width: "84px",
                       height: "84px",
                       borderRadius: "24px",
-                      background: `linear-gradient(135deg, ${activeIcp.themeColor}aa 0%, #111111 100%)`,
-                      border: `1px solid ${activeIcp.themeColor}33`,
-                      boxShadow: `0 12px 30px ${activeIcp.themeColor}33`,
+                      background: `linear-gradient(135deg, ${activeUseCase.themeColor}aa 0%, #111111 100%)`,
+                      border: `1px solid ${activeUseCase.themeColor}33`,
+                      boxShadow: `0 12px 30px ${activeUseCase.themeColor}33`,
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -1055,15 +1055,15 @@ export default function ICPInteractiveWorkflow() {
                     width: "8px",
                     height: "8px",
                     borderRadius: "50%",
-                    background: isAutoplay ? activeIcp.themeColor : "#ef4444",
-                    boxShadow: isAutoplay ? `0 0 8px ${activeIcp.themeColor}` : "none",
+                    background: isAutoplay ? activeUseCase.themeColor : "#ef4444",
+                    boxShadow: isAutoplay ? `0 0 8px ${activeUseCase.themeColor}` : "none",
                     animation: isAutoplay ? "pulseOrb 1.5s infinite" : "none"
                   }}></span>
                   {isAutoplay ? "Simulator running" : "Simulator paused"}
                 </button>
 
                 <div style={{ fontSize: "0.75rem", color: "#888888", fontWeight: 600 }}>
-                  Active Stage: <span style={{ color: activeIcp.themeColor, fontWeight: 800 }}>
+                  Active Stage: <span style={{ color: activeUseCase.themeColor, fontWeight: 800 }}>
                     {activePhase === "pre" ? "1 / 3" : activePhase === "in" ? "2 / 3" : "3 / 3"}
                   </span>
                 </div>
@@ -1086,8 +1086,8 @@ export default function ICPInteractiveWorkflow() {
                         onClick={() => handlePhaseChange(phase)}
                         style={{
                           flex: 1,
-                          background: isActive ? activeIcp.pillColor : "transparent",
-                          color: isActive ? activeIcp.themeColor : "var(--text-dark-muted)",
+                          background: isActive ? activeUseCase.pillColor : "transparent",
+                          color: isActive ? activeUseCase.themeColor : "var(--text-dark-muted)",
                           border: "none",
                           padding: "11px 8px",
                           borderRadius: "14px",
@@ -1111,10 +1111,10 @@ export default function ICPInteractiveWorkflow() {
                   {activePhase === "pre" && (
                     <div style={{ animation: "fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1)" }}>
                       <h3 style={{ fontSize: "1.35rem", fontWeight: 800, color: "var(--text-dark)", marginBottom: "8px", letterSpacing: "-0.02em" }}>
-                        {activeIcp.details.preTitle}
+                        {activeUseCase.details.preTitle}
                       </h3>
                       <p style={{ fontSize: "0.95rem", color: "var(--text-dark-muted)", lineHeight: "1.5", marginBottom: "20px" }}>
-                        {activeIcp.details.preSub}
+                        {activeUseCase.details.preSub}
                       </p>
 
                       {/* Mini briefing card */}
@@ -1126,15 +1126,15 @@ export default function ICPInteractiveWorkflow() {
                         boxShadow: "0 8px 24px rgba(0,0,0,0.02)"
                       }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "12px", borderBottom: "1px solid rgba(0,0,0,0.05)", paddingBottom: "10px" }}>
-                          <span style={{ width: "6px", height: "6px", background: activeIcp.themeColor, borderRadius: "50%" }}></span>
+                          <span style={{ width: "6px", height: "6px", background: activeUseCase.themeColor, borderRadius: "50%" }}></span>
                           <span style={{ fontSize: "0.75rem", fontWeight: 800, color: "var(--text-dark-muted)", textTransform: "uppercase", letterSpacing: "0.06em" }}>
-                            {activeIcp.details.briefCardTitle}
+                            {activeUseCase.details.briefCardTitle}
                           </span>
                         </div>
                         <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px", fontSize: "0.85rem", color: "var(--text-dark)" }}>
-                          {activeIcp.details.briefItems.map((item, idx) => (
+                          {activeUseCase.details.briefItems.map((item, idx) => (
                             <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "8px", lineHeight: 1.4 }}>
-                              <span style={{ color: activeIcp.themeColor, fontWeight: 800 }}>↳</span>
+                              <span style={{ color: activeUseCase.themeColor, fontWeight: 800 }}>↳</span>
                               <span>{item}</span>
                             </li>
                           ))}
@@ -1155,12 +1155,12 @@ export default function ICPInteractiveWorkflow() {
 
                       {/* Chat bubble stream */}
                       <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-                        {activeIcp.details.inSpeakers.map((speak, idx) => (
+                        {activeUseCase.details.inSpeakers.map((speak, idx) => (
                           <div key={idx} style={{
-                            background: speak.isUser ? activeIcp.pillColor : "#f5f5f7",
+                            background: speak.isUser ? activeUseCase.pillColor : "#f5f5f7",
                             padding: "12px 18px",
                             borderRadius: speak.isUser ? "16px 16px 0 16px" : "16px 16px 16px 0",
-                            border: speak.isUser ? `1px solid ${activeIcp.themeColor}1a` : "1px solid rgba(0,0,0,0.04)",
+                            border: speak.isUser ? `1px solid ${activeUseCase.themeColor}1a` : "1px solid rgba(0,0,0,0.04)",
                             alignSelf: speak.isUser ? "flex-end" : "flex-start",
                             maxWidth: "85%",
                             boxShadow: "0 2px 8px rgba(0,0,0,0.01)"
@@ -1176,7 +1176,7 @@ export default function ICPInteractiveWorkflow() {
                                 width: "16px",
                                 height: "16px",
                                 borderRadius: "50%",
-                                background: speak.isUser ? activeIcp.themeColor : "#999999",
+                                background: speak.isUser ? activeUseCase.themeColor : "#999999",
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
@@ -1186,7 +1186,7 @@ export default function ICPInteractiveWorkflow() {
                               }}>
                                 {speak.initials}
                               </div>
-                              <span style={{ fontSize: "0.7rem", fontWeight: 800, color: speak.isUser ? activeIcp.themeColor : "#666666" }}>
+                              <span style={{ fontSize: "0.7rem", fontWeight: 800, color: speak.isUser ? activeUseCase.themeColor : "#666666" }}>
                                 {speak.name}
                               </span>
                             </div>
@@ -1224,14 +1224,14 @@ export default function ICPInteractiveWorkflow() {
                           gap: "8px",
                           boxShadow: "inset 0 1px 3px rgba(0,0,0,0.02)"
                         }}>
-                          <span style={{ color: activeIcp.themeColor, fontWeight: 800 }}>?</span>
+                          <span style={{ color: activeUseCase.themeColor, fontWeight: 800 }}>?</span>
                           <span style={{ fontWeight: 600 }}>{typedText}</span>
-                          <span className="cursor-blink" style={{ width: "2px", height: "13px", background: activeIcp.themeColor }} />
+                          <span className="cursor-blink" style={{ width: "2px", height: "13px", background: activeUseCase.themeColor }} />
                         </div>
 
                         <div style={{
                           background: "#ffffff",
-                          border: `1px solid ${activeIcp.themeColor}1a`,
+                          border: `1px solid ${activeUseCase.themeColor}1a`,
                           borderRadius: "16px",
                           padding: "16px 20px",
                           opacity: showAnswer ? 1 : 0,
@@ -1240,13 +1240,13 @@ export default function ICPInteractiveWorkflow() {
                           boxShadow: "0 6px 20px rgba(0,0,0,0.015)"
                         }}>
                           <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "6px" }}>
-                            <span style={{ width: "6px", height: "6px", background: activeIcp.themeColor, borderRadius: "50%" }}></span>
-                            <span style={{ fontSize: "0.75rem", fontWeight: 800, color: activeIcp.themeColor, letterSpacing: "0.02em" }}>
-                              Saved Context: {activeIcp.details.postSource.split("•")[0]}
+                            <span style={{ width: "6px", height: "6px", background: activeUseCase.themeColor, borderRadius: "50%" }}></span>
+                            <span style={{ fontSize: "0.75rem", fontWeight: 800, color: activeUseCase.themeColor, letterSpacing: "0.02em" }}>
+                              Saved Context: {activeUseCase.details.postSource.split("•")[0]}
                             </span>
                           </div>
                           <p style={{ fontSize: "0.85rem", color: "var(--text-dark)", lineHeight: "1.45" }}>
-                            {activeIcp.details.postAnswer}
+                            {activeUseCase.details.postAnswer}
                           </p>
                         </div>
                       </div>
@@ -1317,7 +1317,7 @@ export default function ICPInteractiveWorkflow() {
                   <div style={{
                     width: `${autoplayProgress}%`,
                     height: "100%",
-                    background: activeIcp.themeColor,
+                    background: activeUseCase.themeColor,
                     borderRadius: "2px",
                     transition: isAutoplay ? "width 0.05s linear" : "width 0.3s ease"
                   }} />
@@ -1361,7 +1361,7 @@ export default function ICPInteractiveWorkflow() {
             <div style={{
               fontSize: "0.75rem",
               fontWeight: 800,
-              color: activeIcp.themeColor,
+              color: activeUseCase.themeColor,
               textTransform: "uppercase",
               letterSpacing: "0.1em",
               marginBottom: "8px"
@@ -1388,7 +1388,7 @@ export default function ICPInteractiveWorkflow() {
           }}
           className="remembers-grid"
           >
-            {activeIcp.remembersList.map((item, idx) => (
+            {activeUseCase.remembersList.map((item, idx) => (
               <div key={idx} style={{
                 background: "#fafafb",
                 border: "1px solid rgba(0,0,0,0.04)",
@@ -1397,7 +1397,7 @@ export default function ICPInteractiveWorkflow() {
                 transition: "all 0.3s"
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = activeIcp.themeColor + "33";
+                e.currentTarget.style.borderColor = activeUseCase.themeColor + "33";
                 e.currentTarget.style.transform = "translateY(-1.5px)";
               }}
               onMouseLeave={(e) => {
@@ -1408,7 +1408,7 @@ export default function ICPInteractiveWorkflow() {
                 <div style={{
                   fontSize: "0.75rem",
                   fontWeight: 800,
-                  color: activeIcp.themeColor,
+                  color: activeUseCase.themeColor,
                   textTransform: "uppercase",
                   letterSpacing: "0.05em",
                   marginBottom: "8px"
@@ -1448,7 +1448,7 @@ export default function ICPInteractiveWorkflow() {
             right: "-10%",
             width: "350px",
             height: "350px",
-            background: `radial-gradient(circle, ${activeIcp.themeColor}22 0%, transparent 70%)`,
+            background: `radial-gradient(circle, ${activeUseCase.themeColor}22 0%, transparent 70%)`,
             pointerEvents: "none",
             filter: "blur(50px)"
           }} />
@@ -1465,7 +1465,7 @@ export default function ICPInteractiveWorkflow() {
               <div style={{
                 fontSize: "0.75rem",
                 fontWeight: 800,
-                color: activeIcp.themeColor,
+                color: activeUseCase.themeColor,
                 textTransform: "uppercase",
                 letterSpacing: "0.15em",
                 marginBottom: "12px"
@@ -1512,7 +1512,7 @@ export default function ICPInteractiveWorkflow() {
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.7rem", color: "#71717a", fontWeight: 700 }}>
                 <span>MEETINGS SEEN</span>
-                <span style={{ color: activeIcp.themeColor }}>COMPOUNDING IQ LEVEL</span>
+                <span style={{ color: activeUseCase.themeColor }}>COMPOUNDING IQ LEVEL</span>
               </div>
               
               <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
@@ -1524,15 +1524,15 @@ export default function ICPInteractiveWorkflow() {
                   <div key={idx} style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.8rem" }}>
                       <span style={{ fontWeight: 600, color: row.glow ? "#fff" : "#a1a1aa" }}>{row.label}</span>
-                      <span style={{ fontSize: "0.75rem", color: row.glow ? activeIcp.themeColor : "#71717a", fontWeight: 600 }}>{row.val}</span>
+                      <span style={{ fontSize: "0.75rem", color: row.glow ? activeUseCase.themeColor : "#71717a", fontWeight: 600 }}>{row.val}</span>
                     </div>
                     <div style={{ height: "6px", background: "rgba(255,255,255,0.05)", borderRadius: "3px", overflow: "hidden" }}>
                       <div style={{
                         width: row.width,
                         height: "100%",
-                        background: row.glow ? `linear-gradient(to right, ${activeIcp.themeColor}, #fff)` : "rgba(255,255,255,0.2)",
+                        background: row.glow ? `linear-gradient(to right, ${activeUseCase.themeColor}, #fff)` : "rgba(255,255,255,0.2)",
                         borderRadius: "3px",
-                        boxShadow: row.glow ? `0 0 10px ${activeIcp.themeColor}` : "none"
+                        boxShadow: row.glow ? `0 0 10px ${activeUseCase.themeColor}` : "none"
                       }} />
                     </div>
                   </div>
@@ -1613,23 +1613,23 @@ export default function ICPInteractiveWorkflow() {
               background: "linear-gradient(to bottom, #ffffff, #fafafb)",
               borderRadius: "18px",
               padding: "24px",
-              border: `1px solid ${activeIcp.themeColor}33`,
-              boxShadow: `0 8px 24px ${activeIcp.themeColor}0d`
+              border: `1px solid ${activeUseCase.themeColor}33`,
+              boxShadow: `0 8px 24px ${activeUseCase.themeColor}0d`
             }}>
-              <div style={{ fontSize: "0.85rem", fontWeight: 800, color: activeIcp.themeColor, marginBottom: "16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+              <div style={{ fontSize: "0.85rem", fontWeight: 800, color: activeUseCase.themeColor, marginBottom: "16px", textTransform: "uppercase", letterSpacing: "0.05em" }}>
                 PersonaOn Context Layer
               </div>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.85rem", color: "var(--text-dark)", fontWeight: 500 }}>
                 <li style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                  <span style={{ color: activeIcp.themeColor, fontWeight: 900 }}>✓</span>
+                  <span style={{ color: activeUseCase.themeColor, fontWeight: 900 }}>✓</span>
                   <span>Maintains operational continuity across meeting lines</span>
                 </li>
                 <li style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                  <span style={{ color: activeIcp.themeColor, fontWeight: 900 }}>✓</span>
+                  <span style={{ color: activeUseCase.themeColor, fontWeight: 900 }}>✓</span>
                   <span>Compounds client context to secure relationship memory</span>
                 </li>
                 <li style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-                  <span style={{ color: activeIcp.themeColor, fontWeight: 900 }}>✓</span>
+                  <span style={{ color: activeUseCase.themeColor, fontWeight: 900 }}>✓</span>
                   <span>Organizes variables and commitments automatically</span>
                 </li>
               </ul>
@@ -1637,7 +1637,7 @@ export default function ICPInteractiveWorkflow() {
           </div>
         </div>
 
-        {/* ICP Voice Statement / Testimonial Box */}
+        {/* Use Case Voice Statement / Testimonial Box */}
         <div style={{
           maxWidth: "1050px",
           margin: "0 auto",
@@ -1657,9 +1657,9 @@ export default function ICPInteractiveWorkflow() {
             height: "64px", 
             borderRadius: "50%", 
             flexShrink: 0,
-            background: activeIcp.themeColor,
+            background: activeUseCase.themeColor,
             border: `2px solid rgba(255, 255, 255, 0.8)`,
-            boxShadow: `0 8px 20px ${activeIcp.themeColor}33`,
+            boxShadow: `0 8px 20px ${activeUseCase.themeColor}33`,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -1669,7 +1669,7 @@ export default function ICPInteractiveWorkflow() {
             textShadow: "0 1px 3px rgba(0,0,0,0.15)",
             transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)"
           }}>
-            {activeIcp.initials}
+            {activeUseCase.initials}
           </div>
 
           <div>
@@ -1681,14 +1681,14 @@ export default function ICPInteractiveWorkflow() {
               fontWeight: 400,
               marginBottom: "12px"
             }}>
-              "{activeIcp.quote}"
+              "{activeUseCase.quote}"
             </p>
             <div>
               <span style={{ fontWeight: 800, fontSize: "0.95rem", color: "var(--text-dark)" }}>
-                {activeIcp.role.split(',')[0]}
+                {activeUseCase.role.split(',')[0]}
               </span>
               <span style={{ fontSize: "0.85rem", color: "var(--text-dark-muted)", fontWeight: 500 }}>
-                {activeIcp.role.substring(activeIcp.role.indexOf(','))}
+                {activeUseCase.role.substring(activeUseCase.role.indexOf(','))}
               </span>
             </div>
           </div>

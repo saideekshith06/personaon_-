@@ -35,7 +35,7 @@ export default function Footer() {
               Product
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.9rem" }}>
-              {["Meeting Capture", "Memory Search", "Team Workspaces", "Integrations", "Pricing"].map((link) => (
+              {["Meeting Capture", "Memory Search", "Pricing"].map((link) => (
                 <li key={link}>
                   <a href="#" style={{ color: "var(--text-dark-muted)", transition: "var(--transition-smooth)" }} className="footer-link">
                     {link}
@@ -51,7 +51,7 @@ export default function Footer() {
               Company
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.9rem" }}>
-              {["About Us", "Customers", "Careers", "Contact"].map((link) => (
+              {["About Us", "Contact"].map((link) => (
                 <li key={link}>
                   <a href="#" style={{ color: "var(--text-dark-muted)", transition: "var(--transition-smooth)" }} className="footer-link">
                     {link}
@@ -67,7 +67,7 @@ export default function Footer() {
               Resources
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "12px", fontSize: "0.9rem" }}>
-              {["Help Center", "API Reference", "Guides & Tutorials", "Blog"].map((link) => (
+              {["Guides & Tutorials", "Blog"].map((link) => (
                 <li key={link}>
                   <a href="#" style={{ color: "var(--text-dark-muted)", transition: "var(--transition-smooth)" }} className="footer-link">
                     {link}
