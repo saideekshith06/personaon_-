@@ -76,8 +76,6 @@ const navItems = [
 ];
 ```
 
-
-
 - Switch the link elements from `<a href>` to Next's `<Link href>` (`import Link from "next/link"`) for client-side navigation. Preserve all existing inline styles, `className`s, hover handlers, and the mobile `onClick={() => setMenuOpen(false)}`.
 - Highlight the active route using `usePathname()` from `next/navigation`: when `pathname === item.href`, render the link in the active color (`var(--text-dark)`) instead of the muted color. Low-cost, expected multi-page behavior.
 - The logo link to `/` and both CTA buttons (Log In / Sign Up, currently `href="#"`) are unchanged.
