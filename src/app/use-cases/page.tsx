@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import ICPSections from "../components/ICPSections";
 import ICPInteractiveWorkflow from "../components/ICPInteractiveWorkflow";
 
-export default function ICPPage() {
+export default function UseCasesPage() {
   return (
     <div
       style={{
