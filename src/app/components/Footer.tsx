@@ -14,13 +14,13 @@ export default function Footer() {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gridTemplateColumns: "2fr 1fr 1fr 1fr",
             gap: "48px",
             marginBottom: "60px",
           }}
         >
           {/* Logo & Description Column */}
-          <div style={{ gridColumn: "span 2", minWidth: "260px" }}>
+          <div style={{ minWidth: "220px" }}>
             <a href="#" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px", color: "var(--text-dark)" }}>
               <Logo width={220} />
             </a>
