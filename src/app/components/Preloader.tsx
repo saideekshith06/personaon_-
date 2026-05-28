@@ -51,7 +51,7 @@ export default function Preloader() {
         left: 0,
         width: "100vw",
         height: "100vh",
-        backgroundColor: "#ffffff",
+        background: "radial-gradient(circle at center, #ffffff 0%, #f3f3f7 25%, #f3f3f7 100%)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -86,6 +86,7 @@ export default function Preloader() {
               width: "160px",
               height: "160px",
               objectFit: "contain",
+              filter: "drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12))",
             }}
           />
         </div>
