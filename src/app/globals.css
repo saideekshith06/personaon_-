@@ -434,4 +434,29 @@ button:active {
   transform: scale(0.97) !important;
 }
 
+/* Custom Pre-loader Theme Styles */
+@keyframes apple-progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+@keyframes preloader-pulse {
+  0%, 100% {
+    transform: scale(0.95);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.0);
+    opacity: 1;
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.05));
+  }
+}
+
+.preloader-overlay.preloader-exit {
+  opacity: 0 !important;
+  transform: scale(1.03) !important;
+  pointer-events: none !important;
+}
+
+
 

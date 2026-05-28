@@ -71,7 +71,7 @@ export default function Navbar() {
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           {/* Logo */}
           <a href="/" style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--text-dark)" }}>
-            <Logo width={140} />
+            <Logo width={180} />
           </a>
 
           {/* Desktop Links (Hidden on mobile) */}

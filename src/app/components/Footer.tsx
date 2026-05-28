@@ -20,9 +20,9 @@ export default function Footer() {
           }}
         >
           {/* Logo & Description Column */}
-          <div style={{ minWidth: "220px" }}>
-            <a href="#" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px", color: "var(--text-dark)" }}>
-              <Logo width={220} />
+          <div style={{ minWidth: "220px", maxWidth: "320px" }}>
+            <a href="#" style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "20px", color: "var(--text-dark)", maxWidth: "280px", width: "100%" }}>
+              <Logo width="100%" />
             </a>
             <p style={{ lineHeight: "1.6", fontSize: "0.95rem", color: "var(--text-dark-muted)", marginBottom: "24px" }}>
               Capture meetings, extract decisions, and build your searchable work memory. Never lose the context of a conversation again.
